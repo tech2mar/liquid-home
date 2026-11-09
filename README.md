@@ -20,7 +20,7 @@ Ein ruhiges Home-Assistant-Dashboard im Stil eines japanischen Gartens: echte Na
 - [card-mod](https://github.com/thomasloven/lovelace-card-mod) – Glas-Optik im Theme
 - [Universal Remote Card](https://github.com/Nerwyn/universal-remote-card) – Fernbedienungen
 - [Appliance Cards](https://github.com/skyrotter/ha-appliance-electromenager-cards) – Waschmaschine, Trockner, Spülmaschine, Saugroboter …
-- [Love Lock Card](https://github.com/ofekashery/love-lock-card) – PIN-Seite (siehe Hinweis unten)
+- Love Lock Card (HACS) – PIN-Seite (siehe Hinweis unten)
 
 ## Installation
 
