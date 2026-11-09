@@ -25,11 +25,13 @@ Für die Feiertage gibt es eigene Themes: Weihnachten, Silvester, Ostern und Hal
 
 ## Diese Karten braucht ihr
 
+Alle gibt es im Marketplace von Home Assistant. Einfach dort nach dem Namen suchen und installieren.
+
 - [Bubble Card](https://github.com/Clooos/Bubble-Card), fast alles im Dashboard ist damit gebaut
 - [card-mod](https://github.com/thomasloven/lovelace-card-mod), für den Glas-Effekt
 - [Universal Remote Card](https://github.com/Nerwyn/universal-remote-card), für die Fernbedienungen
 - [Appliance Cards](https://github.com/skyrotter/ha-appliance-electromenager-cards), für Waschmaschine, Trockner, Spülmaschine und Saugroboter
-- Love Lock Card, nur für die PIN-Seite der Garage
+- Love Lock Card, nur für die PIN-Seite der Garage (auch im Marketplace)
 
 ## Einrichten
 
