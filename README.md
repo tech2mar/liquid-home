@@ -38,7 +38,7 @@ Ein ruhiges Home-Assistant-Dashboard im Stil eines japanischen Gartens: echte Na
 
 - **PIN-Seite:** Die Love Lock Card prüft den PIN nur im Browser, er steht lesbar in der Dashboard-Konfiguration. Für echte Sicherheit (Garagentor, Alarm) lieber Codes in der Integration selbst verwenden. Im Beispiel steht der Platzhalter `1234`.
 - **Fest-Themes:** Jede Seite im Dashboard hat ein eigenes Theme und Foto. Ein Fest-Theme im Profil färbt deshalb nur die Kopfleiste – für die volle Stimmung pro Seite `theme: Fest Weihnachten` und ein `xmas_*.jpg` als Hintergrund setzen.
-- **Statusleiste Android:** Die Themes setzen `app-theme-color` als sechsstelligen Hexwert. Achtstellige Werte (`#RRGGBBAA`) liest die Android-App als `#AARRGGBB` – die Statusleiste wird dann z. B. lila.
+- **Statusleiste Android:** Die Android-App färbt die Statusleiste nach `app-header-background-color`. Die Themes nutzen dort sechsstellige Hexwerte, denn achtstellige Werte (`#RRGGBBAA`) liest die Android-App als `#AARRGGBB` – die Statusleiste wird dann z. B. lila.
 
 ## Lizenz
 
