@@ -1,9 +1,9 @@
-"""Erzeugt die Fest-Themes (Weihnachten, Silvester, Ostern, Halloween) auf Basis von „Optik Glas“.
+"""Erzeugt die Fest-Themes (Weihnachten, Silvester, Ostern, Halloween) auf Basis von „Liquid Home“.
 Ausgabe: homeassistant/themes/fest.yaml, Ziel auf HA: /config/themes/fest/fest.yaml.
 Hintergrund kommt als Farbverlauf aus dem Theme; Seiten mit eigenem Hintergrundbild zeigen weiter ihr Bild.
 """
 import json, pathlib
-FONT = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif'
+FONT = 'system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
 FESTE = {
  "Fest Weihnachten": dict(acc="#B85C5C", acc2="#CDB27A", light="#E6C994", bg="#0A1A13", bg2="#0E241A", glow1="rgba(184,92,92,0.10)", glow2="rgba(205,178,122,0.07)",
      card="rgba(14,32,24,0.82)", tint="rgba(205,178,122,0.03)", chip="rgba(16,36,27,0.86)", text="#F7F2E8", text2="#CFC6B4", ok="#6FBF8A", lbg="#FAF6EE", lcard="rgba(255,252,246,0.86)", ltext="#2A1E14", bild="weihnachten_dezent.jpg"),

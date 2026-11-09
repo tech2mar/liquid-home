@@ -1,7 +1,7 @@
-# Separate Variante auf Basis der gelieferten Liquid-Home-Definition.
-Optik Glas:
-  primary-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif
-  ha-font-family-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif
+# Liquid Home – Haupt-Theme (hell und dunkel)
+Liquid Home:
+  primary-font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  ha-font-family-body: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
   ha-card-border-radius: 24px
   ha-card-border-width: 1px
   ha-card-border-style: solid
@@ -30,7 +30,7 @@ Optik Glas:
       backdrop-filter: var(--liquid-card-filter);
       -webkit-backdrop-filter: var(--liquid-card-filter);
     }
-  card-mod-theme: Optik Glas
+  card-mod-theme: Liquid Home
   modes:
     light:
       liquid-card-background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 48%, rgba(235,242,255,0.07) 100%), rgba(248,250,255,0.80)

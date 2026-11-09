@@ -1,4 +1,4 @@
-# Dashboard „Zuhause“ – im Dashboard: ⋮ → Bearbeiten → ⋮ → Raw-Konfigurationseditor, alles ersetzen.
+# Liquid Home – Dashboard. Einfügen: Dashboard bearbeiten → ⋮ → Raw-Konfigurationseditor
 title: Test Bubble
 views:
 - title: Zuhause
@@ -6,7 +6,7 @@ views:
   icon: mdi:home
   type: sections
   max_columns: 3
-  theme: Optik Glas
+  theme: Liquid Home
   background:
     image: /local/zuhause/zen_foto_9.jpg
     opacity: 60
@@ -113,8 +113,8 @@ views:
       styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
         rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; }.bubble-icon-container { background: transparent !important; }.bubble-icon { color: #f4efe6 !important; opacity:
         .9 !important; }.bubble-name { color: #f4efe6 !important; font-weight: 600 !important; font-size: 13px !important; }.bubble-state { color: rgba(244,239,230,.7) !important; font-size: 12px !important;
-        }${(() => { const el = card.querySelector(''.bubble-state''); if (el) el.innerText = ((() => { const d = parseInt((hass.states[''sensor.home_mullabfuhr_days_until_collection''] || {}).state);
-        return isNaN(d) ? ''–'' : d === 0 ? ''heute'' : d === 1 ? ''morgen'' : d + '' Tage''; })()); return ''''; })()}'
+        }${(() => { const el = card.querySelector(''.bubble-state''); if (el) el.innerText = ((() => { const d = parseInt((hass.states[''sensor.home_mullabfuhr_days_until_collection''] || {}).state); return
+        isNaN(d) ? ''–'' : d === 0 ? ''heute'' : d === 1 ? ''morgen'' : d + '' Tage''; })()); return ''''; })()}'
       grid_options:
         columns: 4
         rows: 1
@@ -1835,7 +1835,7 @@ views:
         .bubble-button-card { overflow: hidden !important; }
         .bubble-state { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
         .bubble-state { text-align: center; font-size: 11.5px !important; -webkit-line-clamp: 2; }.bubble-button-card { justify-content: center !important; gap: 8px; }.bubble-name-container { align-items: center !important; text-align: center !important; }${(() => { const st = e => (hass.states[e] || {}).state; const A = (e, k) => ((hass.states[e] || {}).attributes || {})[k]; const all = Object.values(hass.states); const L = all.filter(s => s.entity_id.startsWith('light.') && !s.attributes.entity_id && s.state !== 'unavailable'); const R = (() => {
-        const m = ['media_player.living_tv', 'media_player.apple_tv_living', 'media_player.eltern_fire_tv'].map(e => hass.states[e]).filter(x => x && ['on', 'playing', 'paused'].includes(x.state));
+        const m = ['media_player.living_tv', 'media_player.eltern_fire_tv'].map(e => hass.states[e]).filter(x => x && ['on', 'playing', 'paused'].includes(x.state));
         const x = m[0];
         const names = {'ar.tvplayer.tv': 'TiviMate', 'com.netflix.ninja': 'Netflix', 'com.google.android.youtube.tv': 'YouTube', 'com.spotify.tv.android': 'Spotify', 'com.crunchyroll.crunchyroid': 'Crunchyroll', 'org.jellyfin.androidtv': 'Jellyfin', 'com.amazon.tv.launcher': 'Startseite', 'com.google.android.tvlauncher': 'Startseite', 'com.plexapp.android': 'Plex', 'com.disney.disneyplus': 'Disney+'};
         return {a: !!x, p: x ? 100 : 0, t: x ? (x.attributes.media_title || names[x.attributes.app_name] || names[x.attributes.app_id] || 'läuft') : 'Fernseher aus'};})(); const c = '176,150,206'; const p = Math.max(0, Math.min(100, R.p || 0)); const bg = R.a ? 'linear-gradient(to top, rgba(' + c + ',0.34) 0%, rgba(' + c + ',0.20) ' + p + '%, rgba(255,255,255,0.05) ' + p + '%, rgba(255,255,255,0.03) 100%), rgba(30,31,36,0.88)' : 'linear-gradient(135deg, rgba(' + c + ',0.15) 0%, rgba(' + c + ',0.05) 60%, rgba(255,255,255,0.04) 100%), rgba(30,31,36,0.88)'; card.style.setProperty('--zen-bg', bg); card.style.setProperty('--zen-ic', 'rgb(' + c + ')'); card.style.setProperty('--zen-icbg', R.a ? 'rgba(' + c + ',0.30)' : 'rgba(' + c + ',0.16)'); const el = card.querySelector('.bubble-state'); if (el) el.innerHTML = (R.big ? '<div class="big">' + R.big + '</div>' : '') + (R.t || ''); return ''; })()}
@@ -2813,23 +2813,6 @@ views:
         hold_action:
           action: more-info
     - type: custom:bubble-card
-      card_type: media-player
-      entity: media_player.apple_tv_living
-      name: Apple TV
-      card_layout: large
-      styles: '.bubble-container, .bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 20px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border:
-        1px solid rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; }.bubble-icon-container { background: rgba(255,255,255,0.14) !important; }.bubble-name { color: #fff
-        !important; font-weight: 600 !important; }'
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/apple-tv-living
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/apple-tv-living
-        hold_action:
-          action: more-info
-    - type: custom:bubble-card
       card_type: separator
       name: Tür und Anwesenheit
       styles: |2
@@ -2894,7 +2877,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Küche
   path: kuche
   icon: mdi:stove
@@ -3528,7 +3511,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Esszimmer
   path: esszimmer
   icon: mdi:silverware-fork-knife
@@ -3952,7 +3935,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Gästezimmer
   path: gastezimmer
   icon: mdi:bed-outline
@@ -4576,7 +4559,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Gästebad
   path: gastebad
   icon: mdi:toilet
@@ -5088,7 +5071,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Fitness
   path: speilzimmer
   icon: mdi:dumbbell
@@ -5567,7 +5550,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Flur
   path: Flur
   icon: mdi:stairs
@@ -6352,7 +6335,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Büro
   path: buro
   icon: mdi:desk
@@ -7045,7 +7028,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Badezimmer
   path: badezimmer
   icon: mdi:shower-head
@@ -7622,7 +7605,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Schlafzimmer
   path: Elternzimmer
   icon: mdi:bed-king-outline
@@ -8270,7 +8253,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Kind 1
   path: kind1
   icon: mdi:teddy-bear
@@ -8757,7 +8740,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Kind 2
   path: kind2
   icon: mdi:baby-face-outline
@@ -9185,7 +9168,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Garage
   path: garage
   icon: mdi:garage-variant
@@ -9591,7 +9574,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Keller
   path: raum-keller
   icon: mdi:home-floor-negative-1
@@ -10132,7 +10115,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Garten
   path: aussen
   icon: mdi:pine-tree
@@ -10804,7 +10787,7 @@ views:
     size: cover
     repeat: no-repeat
     attachment: fixed
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Haushalt
   path: hauswirtschaft
   icon: mdi:washing-machine
@@ -11273,7 +11256,7 @@ views:
       grid_options:
         columns: 6
         rows: 1
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Sicherheit
   path: alarm
   icon: mdi:security
@@ -12175,7 +12158,7 @@ views:
         grid_options:
           columns: 6
           rows: 1
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Stores
   path: stores
   icon: mdi:window-shutter
@@ -13029,7 +13012,7 @@ views:
           show_background: true
           slider_live_update: true
       _full: true
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Klima
   path: klima
   icon: mdi:fan
@@ -13839,7 +13822,7 @@ views:
             action: more-info
         name: Warmwasser Soll
         icon: mdi:thermometer
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Licht
   path: licht
   icon: mdi:lightbulb
@@ -15128,7 +15111,7 @@ views:
             action: more-info
         name: Vordertür
         icon: mdi:wall-sconce
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Ambient Licht
   path: Ambi
   icon: mdi:television-ambient-light
@@ -15864,7 +15847,7 @@ views:
       grid_options:
         columns: 12
         rows: 1
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Events
   path: events
   icon: mdi:pine-tree
@@ -15994,7 +15977,7 @@ views:
       grid_options:
         columns: 12
         rows: auto
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Musik
   path: musik
   icon: mdi:music
@@ -16054,7 +16037,7 @@ views:
       styles: '.bubble-container, .bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 20px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border:
         1px solid rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; }.bubble-icon-container { background: rgba(255,255,255,0.14) !important; }.bubble-name { color: #fff
         !important; font-weight: 600 !important; }'
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Wetter
   path: wetter
   icon: mdi:weather-partly-cloudy
@@ -16219,7 +16202,7 @@ views:
       grid_options:
         columns: 12
         rows: auto
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Grow Room
   path: grow-room
   icon: mdi:flower-tulip
@@ -16765,7 +16748,7 @@ views:
       grid_options:
         columns: 6
         rows: 1
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Media
   path: Media
   icon: mdi:television
@@ -16821,31 +16804,6 @@ views:
         tap_action:
           action: navigate
           navigation_path: /dashboard-test/media-xiaomi
-      styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
-        rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container { display: none !important; }.bubble-button-card
-        { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container { display: flex !important;
-        align-items: center !important; justify-content: center !important; gap: 8px !important; width: 100% !important; flex-grow: 0 !important; }.bubble-icon-container { display: flex !important; align-items:
-        center !important; justify-content: center !important; background: transparent !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important;
-        margin: 0 !important; padding: 0 !important; }.bubble-icon { color: #f4efe6 !important; --mdc-icon-size: 22px !important; margin: 0 !important; }.bubble-name-container { position: static !important;
-        margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center !important; justify-content:
-        center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state { display: none !important;
-        }'
-      grid_options:
-        columns: 4
-        rows: 1
-    - type: custom:bubble-card
-      card_type: button
-      button_type: name
-      name: Apple
-      icon: mdi:apple
-      show_state: false
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/apple-tv-living
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/apple-tv-living
       styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
         rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container { display: none !important; }.bubble-button-card
         { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container { display: flex !important;
@@ -17289,7 +17247,7 @@ views:
         remote-button::part(label) { font-size: 11px; }
         remote-touchpad { width: 100%; margin: 12px 0 14px; }
         remote-touchpad::part(toucharea), remote-touchpad { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; }
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Xiaomi TV
   path: media-xiaomi
   icon: mdi:television-classic
@@ -17354,31 +17312,6 @@ views:
         { position: static !important; margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center
         !important; justify-content: center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state
         { display: none !important; }'
-      grid_options:
-        columns: 4
-        rows: 1
-    - type: custom:bubble-card
-      card_type: button
-      button_type: name
-      name: Apple
-      icon: mdi:apple
-      show_state: false
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/apple-tv-living
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/apple-tv-living
-      styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
-        rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container { display: none !important; }.bubble-button-card
-        { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container { display: flex !important;
-        align-items: center !important; justify-content: center !important; gap: 8px !important; width: 100% !important; flex-grow: 0 !important; }.bubble-icon-container { display: flex !important; align-items:
-        center !important; justify-content: center !important; background: transparent !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important;
-        margin: 0 !important; padding: 0 !important; }.bubble-icon { color: #f4efe6 !important; --mdc-icon-size: 22px !important; margin: 0 !important; }.bubble-name-container { position: static !important;
-        margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center !important; justify-content:
-        center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state { display: none !important;
-        }'
       grid_options:
         columns: 4
         rows: 1
@@ -17745,293 +17678,12 @@ views:
         grid_options:
           columns: 12
           rows: auto
-  theme: Optik Glas
-- title: Apple TV Living
-  path: apple-tv-living
-  icon: mdi:apple
-  type: sections
-  max_columns: 1
-  subview: true
-  back_path: /dashboard-test/home
-  background:
-    image: /local/zuhause/zen_foto_51.jpg
-    opacity: 60
-    alignment: center
-    size: cover
-    repeat: no-repeat
-    attachment: fixed
-  sections:
-  - type: grid
-    cards:
-    - type: custom:bubble-card
-      card_type: button
-      button_type: name
-      name: Living
-      icon: mdi:television
-      show_state: false
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/Media
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/Media
-      styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
-        rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container { display: none !important; }.bubble-button-card
-        { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container { display: flex !important;
-        align-items: center !important; justify-content: center !important; gap: 8px !important; width: 100% !important; flex-grow: 0 !important; }.bubble-icon-container { display: flex !important; align-items:
-        center !important; justify-content: center !important; background: transparent !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important;
-        margin: 0 !important; padding: 0 !important; }.bubble-icon { color: #f4efe6 !important; --mdc-icon-size: 22px !important; margin: 0 !important; }.bubble-name-container { position: static !important;
-        margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center !important; justify-content:
-        center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state { display: none !important;
-        }'
-      grid_options:
-        columns: 4
-        rows: 1
-    - type: custom:bubble-card
-      card_type: button
-      button_type: name
-      name: Fire
-      icon: mdi:television-classic
-      show_state: false
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/media-xiaomi
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/media-xiaomi
-      styles: '.bubble-button-card-container { background: rgba(30,31,36,0.88) !important; border-radius: 22px !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid
-        rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container { display: none !important; }.bubble-button-card
-        { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container { display: flex !important;
-        align-items: center !important; justify-content: center !important; gap: 8px !important; width: 100% !important; flex-grow: 0 !important; }.bubble-icon-container { display: flex !important; align-items:
-        center !important; justify-content: center !important; background: transparent !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important;
-        margin: 0 !important; padding: 0 !important; }.bubble-icon { color: #f4efe6 !important; --mdc-icon-size: 22px !important; margin: 0 !important; }.bubble-name-container { position: static !important;
-        margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center !important; justify-content:
-        center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state { display: none !important;
-        }'
-      grid_options:
-        columns: 4
-        rows: 1
-    - type: custom:bubble-card
-      card_type: button
-      button_type: name
-      name: Apple
-      icon: mdi:apple
-      show_state: false
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-test/apple-tv-living
-      button_action:
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-test/apple-tv-living
-      styles: '.bubble-button-card-container { background: linear-gradient(135deg, rgba(216,207,191,0.42), rgba(216,207,191,0.14)), rgba(30,28,24,0.66) !important; border-radius: 22px !important; backdrop-filter:
-        blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; position: relative !important; }.bubble-sub-button-container
-        { display: none !important; }.bubble-button-card { justify-content: center !important; align-items: center !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }.bubble-content-container
-        { display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; width: 100% !important; flex-grow: 0 !important; }.bubble-icon-container { display:
-        flex !important; align-items: center !important; justify-content: center !important; background: transparent !important; width: 24px !important; height: 24px !important; min-width: 24px !important;
-        min-height: 24px !important; margin: 0 !important; padding: 0 !important; }.bubble-icon { color: #f4efe6 !important; --mdc-icon-size: 22px !important; margin: 0 !important; }.bubble-name-container
-        { position: static !important; margin: 0 !important; padding: 0 !important; width: auto !important; flex: 0 1 auto !important; min-width: 0 !important; display: flex !important; align-items: center
-        !important; justify-content: center !important; }.bubble-name { color: #fff !important; font-weight: 600 !important; font-size: 14px !important; width: auto !important; margin: 0 !important; }.bubble-state
-        { display: none !important; }'
-      grid_options:
-        columns: 4
-        rows: 1
-    - type: custom:universal-remote-card
-      remote_id: remote.apple_tv_living
-      media_player_id: media_player.apple_tv_living
-      keyboard_id: media_player.apple_tv_living
-      platform: Apple TV
-      rows:
-      - - wakeup
-      - - youtube
-        - netflix
-        - crunchyroll
-      - - touchpad
-      - - volume_up
-        - volume_down
-        - menu
-        - top_menu
-      - - skip_backward
-        - play
-        - pause
-        - skip_forward
-      grid_options:
-        columns: 12
-        rows: auto
-      styles: |2
-
-        :host { display: block; --icon-size: 28px; --ha-card-background: transparent; --card-background-color: transparent; --ha-card-border-width: 0; --ha-card-box-shadow: none;
-          background: rgba(30,31,36,0.88); border-radius: 28px; padding: 10px 8px; box-sizing: border-box; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; }
-        ha-card { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-        .row { justify-content: center; gap: 8px; margin: 6px 0; }
-        remote-button { margin: 0; min-width: 58px; min-height: 58px; border-radius: 18px; }
-        remote-button::part(button) { min-width: 58px; min-height: 58px; padding: 6px; border-radius: 18px;
-          background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
-        remote-button::part(icon) { --mdc-icon-size: 28px; width: 28px; height: 28px; color: #f4efe6; }
-        remote-button::part(label) { font-size: 11px; }
-        remote-touchpad { width: 100%; margin: 8px 0; }
-        remote-touchpad::part(toucharea) { height: max(110px, calc(100dvh - 565px)) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; }
-        rgba(30,31,36,0.88); border-radius: 28px; padding: 16px 16px 24px; box-sizing: border-box; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);border: 1px solid rgba(255,255,255,0.06) !important;box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important; }
-        ha-card { background: transparent !important; border: none !important; box-shadow: none !important; }
-        .row { justify-content: center; gap: 10px; margin: 6px 0; }
-        remote-button { margin: 0; min-width: 62px; min-height: 62px; border-radius: 18px; }
-        remote-button::part(button) { min-width: 62px; min-height: 62px; padding: 8px; border-radius: 18px;
-          background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
-        remote-button::part(icon) { --mdc-icon-size: 30px; width: 30px; height: 30px; color: #f4efe6; }
-        remote-button::part(label) { font-size: 11px; }
-        remote-touchpad { width: 100%; margin: 12px 0 14px; }
-        remote-touchpad::part(toucharea), remote-touchpad { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; }
-      custom_actions:
-      - type: touchpad
-        name: touchpad
-        tap_action:
-          action: key
-          key: select
-        up:
-          tap_action:
-            action: key
-            key: up
-          hold_action:
-            action: repeat
-        down:
-          tap_action:
-            action: key
-            key: down
-          hold_action:
-            action: repeat
-        left:
-          tap_action:
-            action: key
-            key: left
-          hold_action:
-            action: repeat
-        right:
-          tap_action:
-            action: key
-            key: right
-          hold_action:
-            action: repeat
-        styles: |-
-          button { border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.06); box-shadow: none; }
-          button:active { transform: scale(.96); }
-      - type: button
-        name: netflix
-        styles: |-
-          button { border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.06); box-shadow: none; }
-          button:active { transform: scale(.96); }
-          .icon { color: #e50914 !important; }
-        icon: mdi:netflix
-        tap_action:
-          action: source
-          source: Netflix
-      - type: button
-        name: youtube
-        styles: |-
-          button { border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.06); box-shadow: none; }
-          button:active { transform: scale(.96); }
-          .icon { color: #ff3030 !important; }
-        icon: mdi:youtube
-        tap_action:
-          action: source
-          source: YouTube
-      - type: button
-        name: spotify
-        styles: |-
-          button { border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.06); box-shadow: none; }
-          button:active { transform: scale(.96); }
-          .icon { color: #1ed760 !important; }
-        icon: mdi:spotify
-        tap_action:
-          action: source
-          source: Spotify
-      - type: button
-        name: crunchyroll
-        styles: |-
-          button { border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.06); box-shadow: none; }
-          button:active { transform: scale(.96); }
-          .icon { color: #f47521 !important; }
-        icon: crunchyroll
-        tap_action:
-          action: source
-          source: Crunchyroll
-      - type: button
-        name: wakeup
-        icon: mdi:power
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: wakeup
-      - type: button
-        name: volume_up
-        icon: mdi:volume-plus
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: volume_up
-      - type: button
-        name: volume_down
-        icon: mdi:volume-minus
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: volume_down
-      - type: button
-        name: menu
-        icon: mdi:arrow-left
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: menu
-      - type: button
-        name: top_menu
-        icon: mdi:home
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: top_menu
-      - type: button
-        name: skip_backward
-        icon: mdi:rewind
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: skip_backward
-      - type: button
-        name: skip_forward
-        icon: mdi:fast-forward
-        tap_action:
-          action: perform-action
-          perform_action: remote.send_command
-          target:
-            entity_id: remote.apple_tv_living
-          data:
-            command: skip_forward
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Garage · PIN
   path: garage-pin
   icon: mdi:garage-lock
   type: sections
-  theme: Optik Glas
+  theme: Liquid Home
   max_columns: 1
   subview: true
   back_path: /dashboard-test/home
@@ -18073,7 +17725,7 @@ views:
   max_columns: 1
   subview: true
   dense_section_placement: true
-  theme: Optik Glas
+  theme: Liquid Home
   badges: []
   cards: []
   sections:
@@ -19117,7 +18769,7 @@ views:
           ha-card {
             border-radius: 18px !important;
           }
-  theme: Optik Glas
+  theme: Liquid Home
 - title: Tastatur und Menü
   path: media-xiaomi-mehr
   icon: mdi:tune-variant
@@ -19430,4 +19082,4 @@ views:
         grid_options:
           columns: 12
           rows: auto
-  theme: Optik Glas
+  theme: Liquid Home

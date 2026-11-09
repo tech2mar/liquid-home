@@ -1,8 +1,8 @@
 # Fest-Themes, erzeugt von werkzeuge/theme_fest.py. JSON ist gültiges YAML. Ziel: /config/themes/fest/fest.yaml
 {
  "Fest Weihnachten": {
-  "primary-font-family": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
-  "ha-font-family-body": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
+  "primary-font-family": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+  "ha-font-family-body": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
   "ha-card-border-radius": "24px",
   "ha-card-border-width": "1px",
   "ha-card-border-style": "solid",
@@ -79,8 +79,8 @@
   }
  },
  "Fest Silvester": {
-  "primary-font-family": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
-  "ha-font-family-body": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
+  "primary-font-family": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+  "ha-font-family-body": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
   "ha-card-border-radius": "24px",
   "ha-card-border-width": "1px",
   "ha-card-border-style": "solid",
@@ -157,8 +157,8 @@
   }
  },
  "Fest Ostern": {
-  "primary-font-family": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
-  "ha-font-family-body": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
+  "primary-font-family": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+  "ha-font-family-body": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
   "ha-card-border-radius": "24px",
   "ha-card-border-width": "1px",
   "ha-card-border-style": "solid",
@@ -235,8 +235,8 @@
   }
  },
  "Fest Halloween": {
-  "primary-font-family": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
-  "ha-font-family-body": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif",
+  "primary-font-family": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+  "ha-font-family-body": "system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
   "ha-card-border-radius": "24px",
   "ha-card-border-width": "1px",
   "ha-card-border-style": "solid",
