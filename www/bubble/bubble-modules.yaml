@@ -1,0 +1,81 @@
+# Liquid Glas – Bubble-Card-Module. Datei nach /config/www/bubble/bubble-modules.yaml.
+# Karten binden sie über `modules: [zg_glas]` ein. `default` gilt automatisch für jede Bubble-Karte.
+default:
+  name: Liquid Standard-Hülle
+  description: 'Gilt für alle Bubble-Karten: Theme-Hülle unsichtbar, Glas-Blur dahinter.'
+  code: |
+    ha-card { background: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; border: none !important; }
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(20px) saturate(115%); -webkit-backdrop-filter: blur(20px) saturate(115%); }
+    /* Kugelglas: dezentes Glas auf der Symbol-Kugel */
+    .bubble-icon-container { position: relative; overflow: hidden; }
+    .bubble-icon-container::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(circle at 32% 24%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.018) 32%, rgba(255,255,255,0) 58%), linear-gradient(180deg, rgba(255,255,255,0.015) 0%, rgba(0,0,0,0.03) 100%); box-shadow: inset 0 1px 0.5px rgba(255,255,255,0.08), inset 0 -1.5px 3px rgba(0,0,0,0.06); }
+    /* kachelglas 22.11.2026: sehr dezenter Lichtschimmer auf jeder Kachel (über dem Hintergrund, nimmt keine Klicks) */
+    .bubble-button-card-container, .bubble-container { position: relative; }
+    .bubble-button-card-container::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(120% 90% at 14% 0%, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.02) 38%, rgba(255,255,255,0) 62%); }
+zg_glas:
+  name: Liquid Glas
+  description: Glas für normale Kacheln.
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(26px) saturate(115%) !important; -webkit-backdrop-filter: blur(26px) saturate(115%) !important; border: 1px solid rgba(255,255,255,0.07) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    .bubble-icon-container { border: 1px solid rgba(255,255,255,0.04) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%); }
+zg_glas_pille:
+  name: Liquid Glas pille
+  description: Glas für runde Chips (Pillen).
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { border-radius: 999px !important;
+      backdrop-filter: blur(26px) saturate(115%) !important; -webkit-backdrop-filter: blur(26px) saturate(115%) !important;
+      border: 1px solid rgba(255,255,255,0.07) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    .bubble-icon-container { border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.04) !important;
+      background-color: rgba(255,255,255,0.06) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%); }
+zg_glas_start:
+  name: Liquid Glas start
+  description: Glas für die großen Raumkacheln der Startseite.
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(26px) saturate(115%) !important;
+      -webkit-backdrop-filter: blur(26px) saturate(115%) !important;
+      border: 1px solid rgba(255,255,255,0.07) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%); }
+zg_glas_eg:
+  name: Liquid Glas eg
+  description: Glas mit Pastellhauch Erdgeschoss (Pfirsich).
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(26px) saturate(115%) !important; -webkit-backdrop-filter: blur(26px) saturate(115%) !important; border: 1px solid rgba(246,201,168,0.26) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    .bubble-icon-container { border: 1px solid rgba(255,255,255,0.04) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%), linear-gradient(160deg, rgba(246,201,168,0.13) 0%, rgba(246,201,168,0) 55%); }
+zg_glas_og:
+  name: Liquid Glas og
+  description: Glas mit Pastellhauch Obergeschoss (Himmelblau).
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(26px) saturate(115%) !important; -webkit-backdrop-filter: blur(26px) saturate(115%) !important; border: 1px solid rgba(184,212,245,0.26) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    .bubble-icon-container { border: 1px solid rgba(255,255,255,0.04) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%), linear-gradient(160deg, rgba(184,212,245,0.13) 0%, rgba(184,212,245,0) 55%); }
+zg_glas_ug:
+  name: Liquid Glas ug
+  description: Glas mit Pastellhauch Keller/Draußen (Salbei).
+  code: |
+    /* glas */
+    .bubble-button-card-container, .bubble-container { backdrop-filter: blur(26px) saturate(115%) !important; -webkit-backdrop-filter: blur(26px) saturate(115%) !important; border: 1px solid rgba(191,227,192,0.26) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.20) !important; }
+    .bubble-icon-container { border: 1px solid rgba(255,255,255,0.04) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+    /* glas-ende */
+    /* hauch */
+    .bubble-button-card-container, .bubble-container { background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 42%), linear-gradient(160deg, rgba(191,227,192,0.13) 0%, rgba(191,227,192,0) 55%); }

@@ -1,0 +1,32 @@
+# Liquid Glas – Chip (runde Pille oben auf der Startseite), Symbol ohne eigenen Kreis
+type: custom:bubble-card
+card_type: button
+button_type: name
+name: Medien
+icon: mdi:play-box-multiple-outline
+show_state: false
+card_layout: normal
+styles: |
+  .bubble-button-card-container { background: rgba(30,31,36,0.62) !important; }.bubble-icon-container { background: transparent !important; }.bubble-icon { color: #f4efe6 !important; opacity: .9 !important; }.bubble-name { color: #f4efe6 !important; font-weight: 600 !important; font-size: 13px !important; }.bubble-state { color: rgba(244,239,230,.7) !important; font-size: 12px !important; }.bubble-name-container { margin-right: 6px !important; }
+  /* rand-leicht */
+  .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+  .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+  /* rand-leicht-ende */
+
+  /* chip-ohne-kreis */
+  .bubble-icon-container { background: transparent !important; border: none !important; box-shadow: none !important; }
+  .bubble-icon-container::before, .bubble-icon-container::after { display: none !important; }
+  /* chip-ohne-kreis-ende */
+grid_options:
+  columns: 4
+  rows: 1
+button_action:
+  tap_action:
+    action: navigate
+    navigation_path: /dashboard-test/Media
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-test/Media
+modules:
+- zg_glas_pille
+scrolling_effect: false

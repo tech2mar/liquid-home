@@ -1,0 +1,885 @@
+# Liquid Glas – Beispiel-Raum (Küche)
+# Entitäten durch eure ersetzen. Braucht Bubble Card, card-mod und die Module aus www/bubble/.
+views:
+- title: Küche (Beispiel)
+  path: kueche
+  icon: mdi:stove
+  type: sections
+  max_columns: 1
+  subview: true
+  sections:
+  - type: grid
+    cards:
+    - type: custom:bubble-card
+      card_type: button
+      button_type: name
+      name: ' '
+      tap_action:
+        action: none
+      button_action:
+        tap_action:
+          action: none
+      styles: |2-
+
+        ha-card { background: none !important; border: none !important; box-shadow: none !important;
+          backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+        .bubble-button-card-container, .bubble-container { background: none !important; border: none !important;
+          box-shadow: none !important; backdrop-filter: none !important; height: 24px !important; }
+        .bubble-button-background, .bubble-icon-container { display: none !important; }
+        .bubble-button-card { padding: 4px 4px 0 !important; align-items: flex-start !important; }
+        .bubble-name-container { margin: 0 !important; width: 100% !important; }
+        .bubble-name-container { display: block !important; }
+        .bubble-name { display: block !important; white-space: normal !important; overflow: visible !important; color: #f4efe6 !important;
+          text-shadow: 0 1px 8px rgba(0,0,0,0.38); line-height: 1.3; }
+        .bubble-name .g, .bubble-name .w, .bubble-name .i, .bubble-name .t { display: block; }
+        .bubble-name .g { font-size: 32px; font-weight: 300; letter-spacing: -0.01em; line-height: 1.15; }
+        .bubble-name .w { height: 10px; }
+        .bubble-name .i { font-size: 14px; font-weight: 400; opacity: .85; white-space: pre-wrap; }
+        .bubble-name .t { font-size: 13px; font-weight: 400; opacity: .6; margin-top: 3px; }
+
+        .bubble-name .g { display: none !important; }
+        .bubble-name .s { display: block; font-size: 14px; opacity: .85; margin: 0; }
+        .bubble-button-card { padding: 0 4px !important; }
+        ${(() => { const ids = [...new Set([...((hass.states['light.kueche_licht'] || {attributes: {}}).attributes.entity_id || []), ...["light.kueche_kochfeld", "light.kueche_spots", "light.kueche_ambient", "light.kueche_insel", "light.kueche_nische", "light.kueche_schrank_led"]])]; const n = ids.filter(e => hass.states[e] && hass.states[e].state === 'on').length; const t = parseFloat((hass.states['sensor.kueche_temperatur'] || {}).state), hu = parseFloat(null); const parts = [n ? n + (n === 1 ? ' Licht an' : ' Lichter an') : 'Alles aus']; if (!isNaN(t)) parts.push(t.toFixed(1).replace('.', ',') + '°'); if (!isNaN(hu)) parts.push(Math.round(hu) + ' %'); const el = card.querySelector('.bubble-name'); if (el) el.innerHTML = '<div class="g">Küche</div><div class="s">' + parts.join(' · ') + '</div>'; return ''; })()}
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      grid_options:
+        columns: 12
+        rows: auto
+    - type: custom:bubble-card
+      card_type: separator
+      name: Licht
+      styles: |2-
+
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-separator-container, .bubble-container { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-line { display: none !important; }
+        .bubble-name { font-size: 17px !important; font-weight: 700 !important; color: #fff !important; }
+        .bubble-icon { display: none !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+    - type: custom:bubble-card
+      card_type: button
+      button_type: switch
+      entity: light.kueche_nische
+      show_state: true
+      card_layout: large
+      scrolling_effect: false
+      styles: |2
+
+        .bubble-button-card-container, .bubble-container {
+          background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+          border-radius: 20px !important;
+          transition: background .3s ease;
+        }
+
+
+        .bubble-button-background { opacity: 0 !important; }
+        .bubble-button-card-container { min-height: 64px !important; }
+        .bubble-button-card { min-height: 64px !important; }
+        .bubble-icon-container {
+          background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+          border-radius: 50% !important;
+        }
+        .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+        .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+          letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+        .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+        .bubble-sub-button { background: transparent !important; }
+        .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+        .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_nische'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_nische'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_nische'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+
+        /* glas-gleich */
+        .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; ${state === 'on' ? '' : 'background-image: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)) !important;'} }
+        /* glas-gleich-ende */
+      tap_action:
+        action: more-info
+      hold_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+      name: Nische
+      grid_options:
+        columns: 6
+        rows: auto
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: button
+      button_type: slider
+      entity: light.kueche_ambient
+      show_state: true
+      card_layout: large
+      scrolling_effect: false
+      styles: |2-
+
+        .bubble-button-card-container, .bubble-container {
+          background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+          border-radius: 20px !important;
+          transition: background .3s ease;
+        }
+
+
+        .bubble-button-background { opacity: 0 !important; }
+        .bubble-button-card-container { min-height: 64px !important; }
+        .bubble-button-card { min-height: 64px !important; }
+        .bubble-icon-container {
+          background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+          border-radius: 50% !important;
+        }
+        .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+        .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+          letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+        .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+        .bubble-sub-button { background: transparent !important; }
+        .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+        .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+        .bubble-container, .bubble-button-card-container { height: 108px !important; }
+        .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+        .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+        .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+        .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+        .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+        .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+        .bubble-sub-button-bottom-container { font-size: 11px; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+        /* dimmen */
+        .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+        .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+        /* dimmen-ende */
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: navigate
+        navigation_path: '#kueche-ambient'
+      hold_action:
+        action: navigate
+        navigation_path: '#kueche-ambient'
+      button_action:
+        tap_action:
+          action: navigate
+          navigation_path: '#kueche-ambient'
+        hold_action:
+          action: navigate
+          navigation_path: '#kueche-ambient'
+      name: Ambient
+      grid_options:
+        columns: 6
+        rows: auto
+      relative_slide: true
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: button
+      button_type: slider
+      entity: light.kueche_spots
+      show_state: true
+      card_layout: large
+      scrolling_effect: false
+      styles: |2-
+
+        .bubble-button-card-container, .bubble-container {
+          background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+          border-radius: 20px !important;
+          transition: background .3s ease;
+        }
+
+
+        .bubble-button-background { opacity: 0 !important; }
+        .bubble-button-card-container { min-height: 64px !important; }
+        .bubble-button-card { min-height: 64px !important; }
+        .bubble-icon-container {
+          background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+          border-radius: 50% !important;
+        }
+        .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+        .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+          letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+        .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+        .bubble-sub-button { background: transparent !important; }
+        .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+        .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+        .bubble-container, .bubble-button-card-container { height: 108px !important; }
+        .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+        .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+        .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+        .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+        .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+        .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+        .bubble-sub-button-bottom-container { font-size: 11px; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+        /* dimmen */
+        .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+        .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_spots'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+        /* dimmen-ende */
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: more-info
+      hold_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+      name: Spots
+      show_attribute: true
+      attribute: brightness
+      grid_options:
+        columns: 6
+        rows: auto
+      relative_slide: true
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: button
+      button_type: slider
+      entity: light.kueche_kochfeld
+      show_state: true
+      card_layout: large
+      scrolling_effect: false
+      styles: |2-
+
+        .bubble-button-card-container, .bubble-container {
+          background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+          border-radius: 20px !important;
+          transition: background .3s ease;
+        }
+
+
+        .bubble-button-background { opacity: 0 !important; }
+        .bubble-button-card-container { min-height: 64px !important; }
+        .bubble-button-card { min-height: 64px !important; }
+        .bubble-icon-container {
+          background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+          border-radius: 50% !important;
+        }
+        .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+        .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+          letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+        .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+        .bubble-sub-button { background: transparent !important; }
+        .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+        .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+        .bubble-container, .bubble-button-card-container { height: 108px !important; }
+        .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+        .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+        .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+        .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+        .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+        .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+        .bubble-sub-button-bottom-container { font-size: 11px; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+        /* dimmen */
+        .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+        .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+        .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_kochfeld'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+        /* dimmen-ende */
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: more-info
+      hold_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+      name: Kochfeld
+      show_attribute: true
+      attribute: brightness
+      relative_slide: true
+      modules:
+      - zg_glas_eg
+      grid_options:
+        columns: 6
+        rows: auto
+    - type: custom:bubble-card
+      card_type: separator
+      name: Store
+      styles: |2-
+
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-separator-container, .bubble-container { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-line { display: none !important; }
+        .bubble-name { font-size: 17px !important; font-weight: 700 !important; color: #fff !important; }
+        .bubble-icon { display: none !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+    - type: custom:bubble-card
+      card_type: button
+      button_type: slider
+      entity: cover.kueche_store
+      show_state: true
+      card_layout: large
+      scrolling_effect: false
+      styles: |2-
+
+        .bubble-button-card-container, .bubble-container {
+          background: ${state === 'on' ? 'linear-gradient(135deg, rgba(126,170,196,0.40) 0%, rgba(126,170,196,0.14) 60%, rgba(255,255,255,0.08) 100%), rgba(14,22,40,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+          border-radius: 20px !important;
+          transition: background .3s ease;
+        }
+
+
+        .bubble-button-background { opacity: 0 !important; }
+        .bubble-button-card-container { min-height: 64px !important; }
+        .bubble-button-card { min-height: 64px !important; }
+        .bubble-icon-container {
+          background: ${state === 'on' ? 'rgba(126,170,196,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+          border-radius: 50% !important;
+        }
+        .bubble-icon { color: ${state === 'on' ? '#64D2FF' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+        .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+          letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+        .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+        .bubble-sub-button { background: transparent !important; }
+        .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+        .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }
+        .bubble-container, .bubble-button-card-container { height: 108px !important; }
+        .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+        .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+        .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+        .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+        .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+        .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+        .bubble-sub-button-bottom-container { font-size: 11px; }
+        .bubble-range-fill { background: rgba(126,170,196,0.55) !important; box-shadow: none !important; }
+
+        /* dimmen */
+        .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+        .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+        .bubble-range-fill { background: linear-gradient(90deg, rgba(126,170,196,0.10), rgba(126,170,196,0.38)) !important; box-shadow: inset -1.5px 0 0 rgba(126,170,196,0.85) !important; opacity: 1 !important; }
+        /* dimmen-ende */
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: more-info
+      hold_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: none
+        hold_action:
+          action: more-info
+      name: Fenster-Store
+      grid_options:
+        columns: 12
+        rows: auto
+      show_attribute: true
+      attribute: current_position
+      sub_button:
+        main:
+        - icon: mdi:arrow-up
+          show_background: true
+          show_icon: true
+          show_name: false
+          show_state: false
+          tap_action:
+            action: perform-action
+            perform_action: cover.open_cover
+            target:
+              entity_id: cover.kueche_store
+        - icon: mdi:stop
+          show_background: true
+          show_icon: true
+          show_name: false
+          show_state: false
+          tap_action:
+            action: perform-action
+            perform_action: cover.stop_cover
+            target:
+              entity_id: cover.kueche_store
+        - icon: mdi:arrow-down
+          show_background: true
+          show_icon: true
+          show_name: false
+          show_state: false
+          tap_action:
+            action: perform-action
+            perform_action: cover.close_cover
+            target:
+              entity_id: cover.kueche_store
+      _full: true
+      relative_slide: true
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: separator
+      name: Melder
+      styles: |2-
+
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-separator-container, .bubble-container { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-line { display: none !important; }
+        .bubble-name { font-size: 17px !important; font-weight: 700 !important; color: #fff !important; }
+        .bubble-icon { display: none !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+    - type: custom:bubble-card
+      card_type: button
+      button_type: state
+      entity: binary_sensor.kueche_rauchmelder
+      name: Rauchmelder
+      show_state: true
+      card_layout: normal
+      scrolling_effect: false
+      styles: |-
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; }.bubble-button-card-container { background: rgba(30,31,36,0.62) !important; border-radius: 18px !important; min-height: 60px !important; }.bubble-button-card { min-height: 60px !important; }.bubble-icon-container { background: rgba(255,255,255,0.10) !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { color: ${ state === 'on' ? '#E8C27A' : 'rgba(244,239,230,0.85)' } !important; margin: 0 !important; }
+
+        .bubble-name { color: rgba(244,239,230,0.75) !important; font-size: 12px !important; font-weight: 500 !important; }.bubble-state { color: #f4efe6 !important; font-size: 14px !important; font-weight: 600 !important; opacity: 1 !important; }.bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: more-info
+      grid_options:
+        columns: 6
+        rows: 1
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: button
+      button_type: state
+      entity: binary_sensor.kueche_bewegung
+      name: Anwesenheit
+      show_state: true
+      card_layout: normal
+      scrolling_effect: false
+      styles: |-
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; }.bubble-button-card-container { background: rgba(30,31,36,0.62) !important; border-radius: 18px !important; min-height: 60px !important; }.bubble-button-card { min-height: 60px !important; }.bubble-icon-container { background: rgba(255,255,255,0.10) !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { color: ${ state === 'on' ? '#E8C27A' : 'rgba(244,239,230,0.85)' } !important; margin: 0 !important; }
+
+        .bubble-name { color: rgba(244,239,230,0.75) !important; font-size: 12px !important; font-weight: 500 !important; }.bubble-state { color: #f4efe6 !important; font-size: 14px !important; font-weight: 600 !important; opacity: 1 !important; }.bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      tap_action:
+        action: more-info
+      button_action:
+        tap_action:
+          action: more-info
+      grid_options:
+        columns: 6
+        rows: 1
+      modules:
+      - zg_glas_eg
+    - type: custom:bubble-card
+      card_type: separator
+      name: Einkaufsliste
+      styles: |2-
+
+        ha-card { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-separator-container, .bubble-container { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+        .bubble-line { display: none !important; }
+        .bubble-name { font-size: 17px !important; font-weight: 700 !important; color: #fff !important; }
+        .bubble-icon { display: none !important; }
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+    - type: todo-list
+      entity: todo.einkaufsliste
+      hide_completed: false
+      display_order: none
+      grid_options:
+        columns: 12
+        rows: auto
+  - type: grid
+    cards:
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#kueche-ambient'
+      name: Ambient
+      entity: light.kueche_ambient
+      show_header: true
+      cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: slider
+        entity: light.kueche_ambient
+        show_state: true
+        card_layout: large
+        scrolling_effect: false
+        styles: |2-
+
+          .bubble-button-card-container, .bubble-container {
+            background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+            border-radius: 20px !important;
+            transition: background .3s ease;
+          }
+
+
+          .bubble-button-background { opacity: 0 !important; }
+          .bubble-button-card-container { min-height: 64px !important; }
+          .bubble-button-card { min-height: 64px !important; }
+          .bubble-icon-container {
+            background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+            border-radius: 50% !important;
+          }
+          .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+          .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+            letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+          .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+          .bubble-sub-button { background: transparent !important; }
+          .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+          .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+          .bubble-container, .bubble-button-card-container { height: 108px !important; }
+          .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+          .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+          .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+          .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+          .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+          .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+          .bubble-sub-button-bottom-container { font-size: 11px; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+          /* dimmen */
+          .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+          .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+          /* dimmen-ende */
+          /* rand-leicht */
+          .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+          .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+          /* rand-leicht-ende */
+        tap_action:
+          action: more-info
+        hold_action:
+          action: more-info
+        button_action:
+          tap_action:
+            action: toggle
+          hold_action:
+            action: more-info
+        name: Alle
+        grid_options:
+          columns: 12
+          rows: auto
+        show_attribute: true
+        attribute: brightness
+        sub_button:
+          main:
+          - select_attribute: effect_list
+            name: Effekt
+            show_name: false
+            show_state: false
+            show_attribute: true
+            attribute: effect
+            show_arrow: true
+            show_background: true
+            show_icon: false
+        relative_slide: true
+        modules:
+        - zg_glas_eg
+      - type: custom:bubble-card
+        card_type: button
+        button_type: slider
+        entity: light.kueche_insel
+        show_state: true
+        card_layout: large
+        scrolling_effect: false
+        styles: |2-
+
+          .bubble-button-card-container, .bubble-container {
+            background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+            border-radius: 20px !important;
+            transition: background .3s ease;
+          }
+
+
+          .bubble-button-background { opacity: 0 !important; }
+          .bubble-button-card-container { min-height: 64px !important; }
+          .bubble-button-card { min-height: 64px !important; }
+          .bubble-icon-container {
+            background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+            border-radius: 50% !important;
+          }
+          .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+          .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+            letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+          .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+          .bubble-sub-button { background: transparent !important; }
+          .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+          .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+          .bubble-container, .bubble-button-card-container { height: 108px !important; }
+          .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+          .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+          .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+          .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+          .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+          .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+          .bubble-sub-button-bottom-container { font-size: 11px; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+          /* dimmen */
+          .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+          .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_insel'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+          /* dimmen-ende */
+          /* rand-leicht */
+          .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+          .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+          /* rand-leicht-ende */
+        tap_action:
+          action: more-info
+        hold_action:
+          action: more-info
+        button_action:
+          tap_action:
+            action: toggle
+          hold_action:
+            action: more-info
+        name: Insel
+        show_attribute: true
+        attribute: brightness
+        relative_slide: true
+        modules:
+        - zg_glas_eg
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: slider
+        entity: light.kueche_vitrine
+        show_state: true
+        card_layout: large
+        scrolling_effect: false
+        styles: |2-
+
+          .bubble-button-card-container, .bubble-container {
+            background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+            border-radius: 20px !important;
+            transition: background .3s ease;
+          }
+
+
+          .bubble-button-background { opacity: 0 !important; }
+          .bubble-button-card-container { min-height: 64px !important; }
+          .bubble-button-card { min-height: 64px !important; }
+          .bubble-icon-container {
+            background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+            border-radius: 50% !important;
+          }
+          .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+          .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+            letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+          .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+          .bubble-sub-button { background: transparent !important; }
+          .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+          .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+          .bubble-container, .bubble-button-card-container { height: 108px !important; }
+          .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+          .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+          .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+          .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+          .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+          .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+          .bubble-sub-button-bottom-container { font-size: 11px; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+          /* dimmen */
+          .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+          .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_vitrine'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+          /* dimmen-ende */
+          /* rand-leicht */
+          .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+          .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+          /* rand-leicht-ende */
+        tap_action:
+          action: more-info
+        hold_action:
+          action: more-info
+        button_action:
+          tap_action:
+            action: toggle
+          hold_action:
+            action: more-info
+        name: Vitrine
+        show_attribute: true
+        attribute: brightness
+        relative_slide: true
+        modules:
+        - zg_glas_eg
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: slider
+        entity: light.kueche_schrank_led
+        show_state: true
+        card_layout: large
+        scrolling_effect: false
+        styles: |2-
+
+          .bubble-button-card-container, .bubble-container {
+            background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+            border-radius: 20px !important;
+            transition: background .3s ease;
+          }
+
+
+          .bubble-button-background { opacity: 0 !important; }
+          .bubble-button-card-container { min-height: 64px !important; }
+          .bubble-button-card { min-height: 64px !important; }
+          .bubble-icon-container {
+            background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+            border-radius: 50% !important;
+          }
+          .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+          .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+            letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+          .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+          .bubble-sub-button { background: transparent !important; }
+          .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+          .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+          .bubble-container, .bubble-button-card-container { height: 108px !important; }
+          .slider-wrapper, .bubble-range-slider, .bubble-sub-button-slider { background: rgba(255,255,255,0.10) !important; border-radius: 14px !important; overflow: hidden !important; box-shadow: none !important; }
+          .bubble-range-value, .bubble-sub-button-bottom-container .bubble-sub-button-name-container { color: rgba(255,255,255,0.88) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+          .bubble-container, .bubble-button-card-container { --bubble-sub-button-height: 24px; }
+          .bubble-sub-button-bottom-container .bubble-sub-button, .bubble-sub-button-bottom-container .bubble-sub-button > *,
+          .bubble-sub-button-bottom-container .slider-container { height: 24px !important; min-height: 24px !important; }
+          .bubble-sub-button .bubble-dropdown-select, .bubble-sub-button .bubble-sub-button-name-container { color: #f4efe6 !important; }
+          .bubble-sub-button-bottom-container { font-size: 11px; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return true ? `rgba(${c},0.60)` : ``; })()} !important; box-shadow: none !important; }
+
+
+          /* dimmen */
+          .bubble-button-card-container, .bubble-container { background-color: rgba(30,31,36,0.62) !important; height: 64px !important; min-height: 64px !important; }
+          .bubble-button-card { height: 64px !important; min-height: 64px !important; }
+          .bubble-range-fill { background: ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(90deg, rgba(${c},0.08), rgba(${c},0.38))` : `transparent`; })()} !important; box-shadow: inset -1.5px 0 0 ${(() => { const s = hass.states['light.kueche_schrank_led'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.70), inset -18px 0 20px -14px rgba(${c},0.45)` : `transparent`; })()} !important; opacity: 1 !important; }
+          /* dimmen-ende */
+          /* rand-leicht */
+          .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+          .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+          /* rand-leicht-ende */
+        tap_action:
+          action: more-info
+        hold_action:
+          action: more-info
+        button_action:
+          tap_action:
+            action: toggle
+          hold_action:
+            action: more-info
+        name: Schrank
+        show_attribute: true
+        attribute: brightness
+        relative_slide: true
+        modules:
+        - zg_glas_eg
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Stimmung
+        icon: mdi:palette-outline
+        card_layout: normal
+        scrolling_effect: false
+        show_state: false
+        grid_options:
+          columns: 12
+          rows: auto
+        tap_action:
+          action: none
+        button_action:
+          tap_action:
+            action: none
+        sub_button:
+          main:
+          - entity: input_select.kueche_stimmung
+            show_name: false
+            show_icon: false
+            show_state: true
+            show_arrow: true
+            show_background: true
+        styles: |2-
+
+          .bubble-button-card-container, .bubble-container {
+            background: ${state === 'on' ? 'linear-gradient(135deg, rgba(255,196,110,0.46) 0%, rgba(255,196,110,0.18) 60%, rgba(255,255,255,0.08) 100%), rgba(40,30,18,0.62)' : 'rgba(30,31,36,0.62)'} !important;
+            border-radius: 20px !important;
+            transition: background .3s ease;
+          }
+
+
+          .bubble-button-background { opacity: 0 !important; }
+          .bubble-button-card-container { min-height: 64px !important; }
+          .bubble-button-card { min-height: 64px !important; }
+          .bubble-icon-container {
+            background: ${state === 'on' ? 'rgba(255,196,110,0.22)' : 'rgba(255,255,255,0.14)'} !important;
+            border-radius: 50% !important;
+          }
+          .bubble-icon { color: ${state === 'on' ? '#FFD60A' : 'rgba(255,255,255,0.92)'} !important; opacity: 1 !important; }
+          .bubble-name { color: #ffffff !important; font-weight: 600 !important; font-size: 15px !important;
+            letter-spacing: -0.01em; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+          .bubble-state { color: rgba(255,255,255,0.72) !important; font-size: 12.5px !important; opacity: 1 !important; }
+          .bubble-sub-button { background: transparent !important; }
+          .bubble-icon-container { display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }.bubble-icon { margin: 0 !important; display: block !important; }
+          .bubble-name, .bubble-state { white-space: normal !important; overflow: hidden !important; text-overflow: ellipsis !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.2 !important; }.bubble-button-card-container, .bubble-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `linear-gradient(135deg, rgba(${c},0.40) 0%, rgba(${c},0.16) 60%, rgba(255,255,255,0.06) 100%), rgba(30,31,36,0.86)` : `rgba(30,31,36,0.62)`; })()} !important; }.bubble-icon-container { background: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgba(${c},0.28)` : `rgba(255,255,255,0.14)`; })()} !important; }.bubble-icon { color: ${(() => { const s = hass.states['light.kueche_ambient'] || {attributes: {}}; const k = s.attributes.rgb_color; const c = (!k || (k[0] > 230 && k[1] > 230 && k[2] > 230)) ? '255,196,110' : k.join(','); return s.state === 'on' ? `rgb(${c})` : `rgba(255,255,255,0.92)`; })()} !important; }
+          /* rand-leicht */
+          .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+          .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+          /* rand-leicht-ende */
+        modules:
+        - zg_glas_eg
+      popup_mode: centered
+      styles: |2-
+
+        /* rand-leicht */
+        .bubble-button-card-container, .bubble-container, ha-card { border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
+        .bubble-icon-container { border-color: rgba(255,255,255,0.05) !important; box-shadow: none !important; }
+        /* rand-leicht-ende */
+      full_width_on_mobile: true
+  background:
+    image: media-source://media_source/local/hintergrund/aktuell.jpg
+    opacity: 45
+    alignment: center
+    size: cover
+    repeat: no-repeat
+    attachment: fixed
+  theme: Zuhause Glas
