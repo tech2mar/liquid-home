@@ -79,7 +79,21 @@ Eine Farbe pro Bedeutung, alle gedämpft. Vorher waren es 55 verschiedene Töne,
 | Kühlen | 140, 168, 186 |
 | Szenen, Medien | 160, 140, 205 |
 
-Ist eine Lampe an, nimmt die Kachel ihre echte Lichtfarbe an, leicht und als Verlauf. Dazu kommt je Etage ein Pastellhauch am Rand: Pfirsich unten, Himmelblau oben, Salbei für Keller und Garten.
+Ist eine Lampe an, nimmt die Kachel ihre echte Lichtfarbe an, leicht und als Verlauf. Ist im Raum alles aus, zeigt die Kachel einen Pastellhauch je Etage: Pfirsich unten, Himmelblau oben, Salbei für Keller und Garten.
+
+### Zustand auf einen Blick
+
+Die runden Chips oben zeigen ihren Zustand mit der Farbe aus der Tabelle, als leichter Verlauf und farbiges Symbol. Ist nichts los, bleiben sie neutral.
+
+| Chip | Farbe |
+|---|---|
+| Alarm | unscharf grün, scharf orange (eigenes Symbol je Modus), ausgelöst Koralle |
+| Müll | morgen Sand, heute Orange |
+| Medien | Lila, sobald irgendwo etwas läuft |
+| Person | grün, wenn zu Hause |
+| Haustür, Garage | zu grün, offen orange |
+
+Der Text bleibt immer auf einer Zeile in der Pille. Umgesetzt ist das als kleiner Block `/* status-chip */` pro Karte, der eine CSS-Variable `--sf` setzt.
 
 ### Glas
 
